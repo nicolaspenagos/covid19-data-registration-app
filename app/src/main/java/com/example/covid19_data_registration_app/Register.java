@@ -137,10 +137,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
             case R.id.continuePollButton:
 
                 String currentUsername = getIntent().getExtras().getString("username");
+                String currentId  = getIntent().getExtras().getString("id");
 
                 Intent i = new Intent(this, Symptoms.class);
                 i.putExtra("score", score);
                 i.putExtra("username", currentUsername);
+                i.putExtra("id", currentId);
                 startActivity(i);
 
                 break;
@@ -152,7 +154,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     // Logic Methods
     // -------------------------------------
     public void enableButton(){
-        Log.e("d", "hola");
+
         if(option1.isChecked()||option2.isChecked()||option3.isChecked()||option4.isChecked()||option5.isChecked()){
 
             continuePollButton.getBackground().setTint(Color.rgb(240, 24, 86));

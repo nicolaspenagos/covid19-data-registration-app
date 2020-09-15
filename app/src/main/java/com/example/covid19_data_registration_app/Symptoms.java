@@ -177,7 +177,15 @@ public class Symptoms extends AppCompatActivity implements View.OnClickListener{
 
             case R.id.finishButton:
 
-                addInfo();
+                //Send to worker thread
+                new Thread(()->{
+
+                    String id = getIntent().getExtras().getString("id");
+                    addId(id);
+                    addInfo();
+
+
+                }).start();
 
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
@@ -215,18 +223,21 @@ public class Symptoms extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+    /*
+     * If the application is running for the first time, this method creates an instance of a new HashSet and saves the info;
+     * otherwise it just saves the id in the HashSet that you already get from the SharedPreferences
+     */
     public void addInfo(){
 
         String currentUsername = getIntent().getExtras().getString("username");
         int currentScore = finalScore + score;
 
-        SharedPreferences sharedPreferences = getSharedPreferences("bin3", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("infoBin", MODE_PRIVATE);
         Set<String> infoSet = sharedPreferences.getStringSet("infoSet", null);
 
         if(infoSet==null)
             infoSet=new HashSet<String>();
 
-        Log.e("d", ""+currentUsername+"-"+currentScore);
         infoSet.add(currentUsername+"%"+currentScore);
 
         SharedPreferences.Editor edit = sharedPreferences.edit();
@@ -236,5 +247,25 @@ public class Symptoms extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+    /*
+     * If the application is running for the first time, this method creates an instance of a new HashSet and saves the id;
+     * otherwise it just saves the id in the HashSet that you already get from the SharedPreferences
+     */
+    public void addId(String id){
+
+        SharedPreferences sharedPreferences = getSharedPreferences("idBin", MODE_PRIVATE);
+        Set<String> idSet = sharedPreferences.getStringSet("idSet", null);
+
+        if(idSet==null)
+            idSet=new HashSet<String>();
+
+        idSet.add(id);
+
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.clear();
+        edit.putStringSet("idSet",idSet);
+        edit.commit();
+
+    }
 
 }
