@@ -7,14 +7,19 @@
     tools:context=".Symptoms">
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/finishButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="40dp"
-        android:text="Button"
+        android:background="@drawable/my_button_bg"
+        android:backgroundTint="#DCDCDC"
+        android:text="Finalizar"
         android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -33,11 +38,11 @@
         app:layout_constraintTop_toBottomOf="@+id/qqq">
 
         <CheckBox
-            android:id="@+id/checkBox31"
+            android:id="@+id/checkBoxS1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:text="Estuve en contacto con alguien que tiene coronavirus."
+            android:text="Fiebre"
             android:textColor="#9E9E9E"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,69 +51,82 @@
             app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
         <CheckBox
-            android:id="@+id/checkBox32"
+            android:id="@+id/checkBoxS2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Hice un viaje internacional en los últimos 3 meses"
+            android:text="Dolor de garganta"
             android:textColor="#9E9E9E"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox31" />
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxS1" />
 
         <CheckBox
-            android:id="@+id/checkBox33"
+            android:id="@+id/checkBoxS3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Hice un viaje nacional en los ultimos 3 meses"
+            android:text="Congestion nasal"
             android:textColor="#9E9E9E"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox32" />
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxS2" />
 
         <CheckBox
-            android:id="@+id/checkBox34"
+            android:id="@+id/checkBoxS4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Soy trabajador de la salud "
+            android:text="Tos"
             android:textColor="#9E9E9E"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox33" />
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxS3" />
 
         <CheckBox
-            android:id="@+id/checkBox35"
+            android:id="@+id/checkBoxS5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Ninguna de las anteriores"
+            android:text="Fatiga"
             android:textColor="#9E9E9E"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox34" />
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxS4" />
 
         <CheckBox
-            android:id="@+id/checkBox36"
+            android:id="@+id/checkBoxS6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Ninguna de las anteriores"
+            android:text="Dificultad para respirar"
             android:textColor="#9E9E9E"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/checkBox35" />
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxS5" />
+
+        <CheckBox
+            android:id="@+id/checkBoxS7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Ninguno"
+            android:textColor="#9E9E9E"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/checkBoxS6" />
 
         <TextView
             android:id="@+id/textView16"
@@ -127,7 +145,7 @@
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nexo epidemiológico"
+            android:text="Síntomas"
             android:textColor="#616163"
             android:textSize="30sp"
             android:textStyle="bold"

@@ -101,7 +101,7 @@ public class NewRegister extends AppCompatActivity {
     public boolean checkId(String id){
 
         Set<String> idSet =  getSharedPreferences("bin", MODE_PRIVATE).getStringSet("idSet", null);
-        return (id==null) ? true : !idSet.contains(id);
+        return (idSet==null) ? true : !idSet.contains(id);
 
     }
 

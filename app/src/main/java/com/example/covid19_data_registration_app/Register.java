@@ -7,9 +7,14 @@ package com.example.covid19_data_registration_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 public class Register extends AppCompatActivity implements View.OnClickListener{
 
@@ -21,6 +26,12 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
     private CheckBox option3;
     private CheckBox option4;
     private CheckBox option5;
+    private Button continuePollButton;
+
+    // -------------------------------------
+    // Global Variables
+    // -------------------------------------
+    private int score;
 
     // -------------------------------------
     // API Android methods
@@ -36,12 +47,14 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         option3 = findViewById(R.id.checkBox3);
         option4 = findViewById(R.id.checkBox4);
         option5 = findViewById(R.id.checkBox5);
+        continuePollButton = findViewById(R.id.continuePollButton);
 
         option1.setOnClickListener(this);
         option2.setOnClickListener(this);
         option3.setOnClickListener(this);
         option4.setOnClickListener(this);
         option5.setOnClickListener(this);
+        continuePollButton.setOnClickListener(this);
 
     }
 
@@ -52,45 +65,106 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
 
             case R.id.checkBox1:
 
-                if(option1.isChecked())
-                 option5.setChecked(false);
+                enableButton();
+                if(option1.isChecked()) {
+
+                    option5.setChecked(false);
+                    score += 3;
+
+                }else{
+                    score -= 3;
+                }
 
                 break;
 
             case R.id.checkBox2:
 
-                if(option2.isChecked())
+                enableButton();
+                if(option2.isChecked()){
+
                     option5.setChecked(false);
+                    score += 3;
+
+                }else{
+                    score -= 3;
+                }
 
                 break;
 
             case R.id.checkBox3:
 
-                if(option3.isChecked())
+                enableButton();
+                if(option3.isChecked()){
+
+                    option5.setChecked(false);
+                    score += 3;
+
+                }else{
+                    score -= 3;
+                }
                     option5.setChecked(false);
 
                 break;
 
             case R.id.checkBox4:
 
-                if(option4.isChecked())
+                enableButton();
+                if(option4.isChecked()){
+
                     option5.setChecked(false);
+                    score += 3;
+
+                }else {
+                    score -= 3;
+                }
 
                 break;
 
             case R.id.checkBox5:
 
+                enableButton();
                 if(option5.isChecked()){
 
                     option1.setChecked(false);
                     option2.setChecked(false);
                     option3.setChecked(false);
                     option4.setChecked(false);
-
+                    score = 0;
                 }
 
                 break;
-                
+
+            case R.id.continuePollButton:
+
+                String currentUsername = getIntent().getExtras().getString("username");
+
+                Intent i = new Intent(this, Symptoms.class);
+                i.putExtra("score", score);
+                i.putExtra("username", currentUsername);
+                startActivity(i);
+
+                break;
+
         }
     }
+
+    // -------------------------------------
+    // Logic Methods
+    // -------------------------------------
+    public void enableButton(){
+        Log.e("d", "hola");
+        if(option1.isChecked()||option2.isChecked()||option3.isChecked()||option4.isChecked()||option5.isChecked()){
+
+            continuePollButton.getBackground().setTint(Color.rgb(240, 24, 86));
+            continuePollButton.setEnabled(true);
+
+        }else{
+
+            continuePollButton.getBackground().setTint(Color.rgb(220, 220, 220));
+            continuePollButton.setEnabled(false);
+
+        }
+
+    }
+
 }
