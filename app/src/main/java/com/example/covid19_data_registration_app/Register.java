@@ -49,6 +49,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener{
         option5 = findViewById(R.id.checkBox5);
         continuePollButton = findViewById(R.id.continuePollButton);
 
+        continuePollButton.setEnabled(false);
+
         option1.setOnClickListener(this);
         option2.setOnClickListener(this);
         option3.setOnClickListener(this);

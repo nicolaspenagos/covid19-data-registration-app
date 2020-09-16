@@ -59,6 +59,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
+            android:scrollbars="vertical"
+            android:text="NO_DATA"
             android:textAlignment="textStart"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"

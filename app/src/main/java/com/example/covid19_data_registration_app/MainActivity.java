@@ -5,14 +5,18 @@
  */
 package com.example.covid19_data_registration_app;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.TreeSet;
@@ -37,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
         dataTextView = findViewById(R.id.dataTextView);
 
+        dataTextView.setMovementMethod(new ScrollingMovementMethod());
+
         registerButton.setOnClickListener(
 
                 (view)->{
@@ -50,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onResume() {
         super.onResume();
@@ -62,22 +69,19 @@ public class MainActivity extends AppCompatActivity {
     // -------------------------------------
     // Logic methods
     // -------------------------------------
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public void showInfo(){
 
         String msg = "Resultados ordenados por nivel de riesgo: \n\n";
         HashSet<String> info = (HashSet<String>) getSharedPreferences("infoBin", MODE_PRIVATE).getStringSet("infoSet", new HashSet<String>());
 
-        //
-        // It was not possible to obtain and cast the TreeSet directly from the SharedPrederes since so far
-        // the API does not guarantees that the Set you get when calling getStringSet() is the same, or even
-        // the same implementation, as the one stored when calling putStringSet().
-        //
-        TreeSet<String> sortedInfo = new TreeSet<String>(new Comparator<String>() {
-            @Override
-            public int compare(String s1, String s2) {
+        ArrayList<String> sortedInfo = new ArrayList<String>(info);
 
-                int i1 = Integer.parseInt(s1.split("%")[1]);
-                int i2 = Integer.parseInt(s2.split("%")[1]);
+        sortedInfo.sort(new Comparator<String>() {
+            @Override
+            public int compare(String s, String t1) {
+                int i1 = Integer.parseInt(s.split("%")[1]);
+                int i2 = Integer.parseInt(t1.split("%")[1]);
 
                 //Rverse order
                 if(i1>i2){
@@ -87,24 +91,14 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     return 0;
                 }
-
             }
         });
 
-        sortedInfo.addAll(info);
-
-        if(!sortedInfo.isEmpty()){
-
-            for (String s: sortedInfo){
-
-                String[] parts = s.split("%");
-                msg+= String.format("%-20s %s", parts[0] , parts[1])+"\n";
-              //  msg+= parts[0]+space(parts[0].length(),parts[1].length())+parts[1]+"\n";
-
-            }
-
+        for(int i=0; i<sortedInfo.size(); i++){
+            String[] parts = sortedInfo.get(i).split("%");
+            msg+= String.format("%-20s %s", parts[0] , parts[1])+"\n";
         }
-
+        
         String finalMsg = msg;
         runOnUiThread(()-> dataTextView.setText(finalMsg));
 

@@ -57,6 +57,8 @@ public class Symptoms extends AppCompatActivity implements View.OnClickListener{
         option7 = findViewById(R.id.checkBoxS7);
         finishButton = findViewById(R.id.finishButton);
 
+        finishButton.setEnabled(false);
+
         option1.setOnClickListener(this);
         option2.setOnClickListener(this);
         option3.setOnClickListener(this);
