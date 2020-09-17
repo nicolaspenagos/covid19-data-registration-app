@@ -186,11 +186,14 @@ public class Symptoms extends AppCompatActivity implements View.OnClickListener{
                     addId(id);
                     addInfo();
 
+                    //Once finished, sent to Ui Thread
+                    runOnUiThread(()->{
 
+                        Intent i = new Intent(this, MainActivity.class);
+                        startActivity(i);
+
+                    });
                 }).start();
-
-                Intent i = new Intent(this, MainActivity.class);
-                startActivity(i);
 
                 break;
 
@@ -234,7 +237,7 @@ public class Symptoms extends AppCompatActivity implements View.OnClickListener{
         String currentUsername = getIntent().getExtras().getString("username");
         int currentScore = finalScore + score;
 
-        SharedPreferences sharedPreferences = getSharedPreferences("infoBin", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("myInfoBin", MODE_PRIVATE);
         Set<String> infoSet = sharedPreferences.getStringSet("infoSet", null);
 
         if(infoSet==null)
@@ -255,7 +258,7 @@ public class Symptoms extends AppCompatActivity implements View.OnClickListener{
      */
     public void addId(String id){
 
-        SharedPreferences sharedPreferences = getSharedPreferences("idBin", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("myIdBin", MODE_PRIVATE);
         Set<String> idSet = sharedPreferences.getStringSet("idSet", null);
 
         if(idSet==null)

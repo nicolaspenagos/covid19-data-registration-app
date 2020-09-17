@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         dataTextView = findViewById(R.id.dataTextView);
 
         dataTextView.setMovementMethod(new ScrollingMovementMethod());
+        dataTextView.setTypeface(Typeface.MONOSPACE);
 
         registerButton.setOnClickListener(
 
@@ -72,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void showInfo(){
 
-        String msg = "Resultados ordenados por nivel de riesgo: \n\n";
-        HashSet<String> info = (HashSet<String>) getSharedPreferences("infoBin", MODE_PRIVATE).getStringSet("infoSet", new HashSet<String>());
+        String msg = "\n";
+        HashSet<String> info = (HashSet<String>) getSharedPreferences("myInfoBin", MODE_PRIVATE).getStringSet("infoSet", new HashSet<String>());
 
         ArrayList<String> sortedInfo = new ArrayList<String>(info);
 
@@ -95,26 +97,15 @@ public class MainActivity extends AppCompatActivity {
         });
 
         for(int i=0; i<sortedInfo.size(); i++){
+
             String[] parts = sortedInfo.get(i).split("%");
             msg+= String.format("%-20s %s", parts[0] , parts[1])+"\n";
+
         }
-        
+
         String finalMsg = msg;
         runOnUiThread(()-> dataTextView.setText(finalMsg));
 
-    }
-
-    public String space(int x, int y){
-
-        Log.e("debug", x +" "+y);
-        int z = 30-x-y;
-
-        String space = "";
-        for(int i = 0; i<z; i++){
-            space+=" ";
-        }
-
-        return space;
     }
 
 }
